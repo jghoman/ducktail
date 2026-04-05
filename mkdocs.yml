@@ -1,0 +1,22 @@
+site_name: ducktail
+site_description: "tail -f for DuckLake tables"
+
+theme:
+  name: material
+  palette:
+    scheme: slate
+    primary: teal
+  features:
+    - content.code.copy
+
+nav:
+  - Getting Started: getting-started.md
+  - Usage: usage.md
+  - Interactive Mode: interactive.md
+  - Demo: demo.md
+
+markdown_extensions:
+  - tables
+  - admonition
+  - pymdownx.highlight
+  - pymdownx.superfences

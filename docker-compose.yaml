@@ -1,0 +1,17 @@
+services:
+  postgres:
+    image: postgres:17
+    hostname: postgres
+    ports:
+      - "127.0.0.1:5433:5432"
+    environment:
+      POSTGRES_USER: ducklake
+      POSTGRES_PASSWORD: ducklake
+      POSTGRES_DB: ducklake
+    healthcheck:
+      test: pg_isready -U ducklake -d ducklake
+      interval: 2s
+      timeout: 5s
+      retries: 5
+    tmpfs:
+      - /var/lib/postgresql/data

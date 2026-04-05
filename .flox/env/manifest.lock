@@ -1,0 +1,397 @@
+{
+  "lockfile-version": 1,
+  "manifest": {
+    "schema-version": "1.11.0",
+    "install": {
+      "just": {
+        "pkg-path": "just"
+      },
+      "python312": {
+        "pkg-path": "python312"
+      },
+      "uv": {
+        "pkg-path": "uv"
+      }
+    },
+    "hook": {},
+    "profile": {},
+    "options": {}
+  },
+  "packages": [
+    {
+      "attr_path": "just",
+      "broken": false,
+      "derivation": "/nix/store/wgiwk6knikxmlbncn9jxgnbmjfkbs3a5-just-1.48.1.drv",
+      "description": "Handy way to save and run project-specific commands",
+      "install_id": "just",
+      "license": "CC0-1.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=6201e203d09599479a3b3450ed24fa81537ebc4e",
+      "name": "just-1.48.1",
+      "pname": "just",
+      "rev": "6201e203d09599479a3b3450ed24fa81537ebc4e",
+      "rev_count": 972949,
+      "rev_date": "2026-04-01T09:47:46Z",
+      "scrape_date": "2026-04-02T18:01:19.725631Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "1.48.1",
+      "outputs_to_install": [
+        "man",
+        "out"
+      ],
+      "outputs": {
+        "doc": "/nix/store/nrmj28rpsyww5nrnmvh5lgv3fb9yy2z2-just-1.48.1-doc",
+        "man": "/nix/store/278r202r2x8vmfqazjvrqnwiddf46wv0-just-1.48.1-man",
+        "out": "/nix/store/8nx997pz3x4s7arfkfnh05bxrhxihc7a-just-1.48.1"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "just",
+      "broken": false,
+      "derivation": "/nix/store/0mhxh0fg4gm5bk6gn517gn1p9d8ikxbd-just-1.48.1.drv",
+      "description": "Handy way to save and run project-specific commands",
+      "install_id": "just",
+      "license": "CC0-1.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=6201e203d09599479a3b3450ed24fa81537ebc4e",
+      "name": "just-1.48.1",
+      "pname": "just",
+      "rev": "6201e203d09599479a3b3450ed24fa81537ebc4e",
+      "rev_count": 972949,
+      "rev_date": "2026-04-01T09:47:46Z",
+      "scrape_date": "2026-04-02T18:32:56.579720Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "1.48.1",
+      "outputs_to_install": [
+        "man",
+        "out"
+      ],
+      "outputs": {
+        "doc": "/nix/store/sk2qhnjinhdyvw4b3rjsprxdq0g624fp-just-1.48.1-doc",
+        "man": "/nix/store/bmri1k5r4pdmkm9hpkzf2hiafhh2f1lj-just-1.48.1-man",
+        "out": "/nix/store/8bnqysi50wcgj096mc5ihgb30vg4bbrf-just-1.48.1"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "just",
+      "broken": false,
+      "derivation": "/nix/store/fkvyqggp6srshsikwkqc692lvzzhiszr-just-1.48.1.drv",
+      "description": "Handy way to save and run project-specific commands",
+      "install_id": "just",
+      "license": "CC0-1.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=6201e203d09599479a3b3450ed24fa81537ebc4e",
+      "name": "just-1.48.1",
+      "pname": "just",
+      "rev": "6201e203d09599479a3b3450ed24fa81537ebc4e",
+      "rev_count": 972949,
+      "rev_date": "2026-04-01T09:47:46Z",
+      "scrape_date": "2026-04-02T19:02:34.678022Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "1.48.1",
+      "outputs_to_install": [
+        "man",
+        "out"
+      ],
+      "outputs": {
+        "doc": "/nix/store/gcb85apyfg5dr9dsl7d6bmniasbbjci7-just-1.48.1-doc",
+        "man": "/nix/store/xjs7lj8l07h8xjawpimbaybbpynpigvp-just-1.48.1-man",
+        "out": "/nix/store/5j82p8hwpw17g16hwrzhdpnc03lqq41q-just-1.48.1"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "just",
+      "broken": false,
+      "derivation": "/nix/store/nkxpp5cs049ja5b4ilsqss841ny6vclg-just-1.48.1.drv",
+      "description": "Handy way to save and run project-specific commands",
+      "install_id": "just",
+      "license": "CC0-1.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=6201e203d09599479a3b3450ed24fa81537ebc4e",
+      "name": "just-1.48.1",
+      "pname": "just",
+      "rev": "6201e203d09599479a3b3450ed24fa81537ebc4e",
+      "rev_count": 972949,
+      "rev_date": "2026-04-01T09:47:46Z",
+      "scrape_date": "2026-04-02T19:36:53.948108Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "1.48.1",
+      "outputs_to_install": [
+        "man",
+        "out"
+      ],
+      "outputs": {
+        "doc": "/nix/store/jqgm95ji0j3372ijaq2xa1id01hswarj-just-1.48.1-doc",
+        "man": "/nix/store/rc0db27l2zffmga7n59cgj11lhr5jlkp-just-1.48.1-man",
+        "out": "/nix/store/yasj96m1zc22cd9mi6i2wgbznksk0ycj-just-1.48.1"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "python312",
+      "broken": false,
+      "derivation": "/nix/store/5ncdapm2p40gqcfdq8xm6kadya37fh8i-python3-3.12.13.drv",
+      "description": "High-level dynamically-typed programming language",
+      "install_id": "python312",
+      "license": "Python-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=6201e203d09599479a3b3450ed24fa81537ebc4e",
+      "name": "python3-3.12.13",
+      "pname": "python312",
+      "rev": "6201e203d09599479a3b3450ed24fa81537ebc4e",
+      "rev_count": 972949,
+      "rev_date": "2026-04-01T09:47:46Z",
+      "scrape_date": "2026-04-02T18:01:42.666119Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "python3-3.12.13",
+      "outputs_to_install": [
+        "out",
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/i61paf2j8s4386774b42jzrk0vwazs98-python3-3.12.13"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "python312",
+      "broken": false,
+      "derivation": "/nix/store/f5ff69d808qi0jxlfp08xghdfpl660w7-python3-3.12.13.drv",
+      "description": "High-level dynamically-typed programming language",
+      "install_id": "python312",
+      "license": "Python-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=6201e203d09599479a3b3450ed24fa81537ebc4e",
+      "name": "python3-3.12.13",
+      "pname": "python312",
+      "rev": "6201e203d09599479a3b3450ed24fa81537ebc4e",
+      "rev_count": 972949,
+      "rev_date": "2026-04-01T09:47:46Z",
+      "scrape_date": "2026-04-02T18:33:32.924397Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "python3-3.12.13",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "debug": "/nix/store/92hp83hx7nz2ql9kzpgl63h2rgyr2a2b-python3-3.12.13-debug",
+        "out": "/nix/store/my7zqjp1gw9xa72p6ik81jchfgik8naf-python3-3.12.13"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "python312",
+      "broken": false,
+      "derivation": "/nix/store/1pv9kkxlwhrrgzhdwrm5qrz4djpd1w5a-python3-3.12.13.drv",
+      "description": "High-level dynamically-typed programming language",
+      "install_id": "python312",
+      "license": "Python-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=6201e203d09599479a3b3450ed24fa81537ebc4e",
+      "name": "python3-3.12.13",
+      "pname": "python312",
+      "rev": "6201e203d09599479a3b3450ed24fa81537ebc4e",
+      "rev_count": 972949,
+      "rev_date": "2026-04-01T09:47:46Z",
+      "scrape_date": "2026-04-02T19:02:57.140205Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "python3-3.12.13",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/xv4hp7xwh6xqvwhb1pab12xmk91h1b17-python3-3.12.13"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "python312",
+      "broken": false,
+      "derivation": "/nix/store/p6x25i0mj5c1pvhm8h2qmq79xd1w5gqf-python3-3.12.13.drv",
+      "description": "High-level dynamically-typed programming language",
+      "install_id": "python312",
+      "license": "Python-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=6201e203d09599479a3b3450ed24fa81537ebc4e",
+      "name": "python3-3.12.13",
+      "pname": "python312",
+      "rev": "6201e203d09599479a3b3450ed24fa81537ebc4e",
+      "rev_count": 972949,
+      "rev_date": "2026-04-01T09:47:46Z",
+      "scrape_date": "2026-04-02T19:37:34.347540Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "python3-3.12.13",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "debug": "/nix/store/6r8c9jpb9wmfnw33fr11qp067xkxwabp-python3-3.12.13-debug",
+        "out": "/nix/store/3437kliwcg0aq7h30alls8mvsv6laarf-python3-3.12.13"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "uv",
+      "broken": false,
+      "derivation": "/nix/store/xmvr9nnsm4yxzjfy4l478fn0pvmzg8mv-uv-0.11.2.drv",
+      "description": "Extremely fast Python package installer and resolver, written in Rust",
+      "install_id": "uv",
+      "license": "[ Apache-2.0, MIT ]",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=6201e203d09599479a3b3450ed24fa81537ebc4e",
+      "name": "uv-0.11.2",
+      "pname": "uv",
+      "rev": "6201e203d09599479a3b3450ed24fa81537ebc4e",
+      "rev_count": 972949,
+      "rev_date": "2026-04-01T09:47:46Z",
+      "scrape_date": "2026-04-02T18:03:32.072289Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.11.2",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/xn8z7nwi93k6hdqrcvpkl3y9qk3zhr5k-uv-0.11.2"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "uv",
+      "broken": false,
+      "derivation": "/nix/store/pixw3bb19ybimq2r92hgcybfq9hf6a5j-uv-0.11.2.drv",
+      "description": "Extremely fast Python package installer and resolver, written in Rust",
+      "install_id": "uv",
+      "license": "[ Apache-2.0, MIT ]",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=6201e203d09599479a3b3450ed24fa81537ebc4e",
+      "name": "uv-0.11.2",
+      "pname": "uv",
+      "rev": "6201e203d09599479a3b3450ed24fa81537ebc4e",
+      "rev_count": 972949,
+      "rev_date": "2026-04-01T09:47:46Z",
+      "scrape_date": "2026-04-02T18:35:46.979496Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.11.2",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/zpy7fkw340vjw45nz3dnvlzj28aq9p9m-uv-0.11.2"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "uv",
+      "broken": false,
+      "derivation": "/nix/store/9gy2q5aykbscq7lw7c02hyag4piqjhjz-uv-0.11.2.drv",
+      "description": "Extremely fast Python package installer and resolver, written in Rust",
+      "install_id": "uv",
+      "license": "[ Apache-2.0, MIT ]",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=6201e203d09599479a3b3450ed24fa81537ebc4e",
+      "name": "uv-0.11.2",
+      "pname": "uv",
+      "rev": "6201e203d09599479a3b3450ed24fa81537ebc4e",
+      "rev_count": 972949,
+      "rev_date": "2026-04-01T09:47:46Z",
+      "scrape_date": "2026-04-02T19:04:42.750549Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.11.2",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/vhixdscpv5zf4wygl66x4mc25kx8givn-uv-0.11.2"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "uv",
+      "broken": false,
+      "derivation": "/nix/store/6j0lmn6na0hqg9zf3jps16n5m6x1jgzq-uv-0.11.2.drv",
+      "description": "Extremely fast Python package installer and resolver, written in Rust",
+      "install_id": "uv",
+      "license": "[ Apache-2.0, MIT ]",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=6201e203d09599479a3b3450ed24fa81537ebc4e",
+      "name": "uv-0.11.2",
+      "pname": "uv",
+      "rev": "6201e203d09599479a3b3450ed24fa81537ebc4e",
+      "rev_count": 972949,
+      "rev_date": "2026-04-01T09:47:46Z",
+      "scrape_date": "2026-04-02T19:39:57.627488Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.11.2",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/bh0mb740hx20n4x0zp234wk0r33a8pi7-uv-0.11.2"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    }
+  ]
+}
