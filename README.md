@@ -2,6 +2,8 @@
 
 `tail -f` for [DuckLake](https://ducklake.select) tables.
 
+![Screenshot](./images/illustration.jpg)
+
 Watch inserts, deletes, and updates flow through a DuckLake table in real time,
 powered by DuckLake's built-in CDC.
 
