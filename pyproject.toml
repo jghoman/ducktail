@@ -12,7 +12,7 @@ dependencies = [
     "duckdb>=1.4,<2",
     "pyarrow>=18.0,<24",
     "pyducklake>=1.0",
-    "rich>=13.0,<14",
+    "rich>=13.0,<15",
     "pytz>=2024.1",
 ]
 
