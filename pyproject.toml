@@ -4,7 +4,8 @@ build-backend = "hatchling.build"
 
 [project]
 name = "ducktail"
-version = "0.1.0"
+version = "1.0.0"
+readme = "README.md"
 description = "Tail DuckLake tables via CDC"
 requires-python = ">=3.12"
 dependencies = [
