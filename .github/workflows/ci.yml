@@ -5,23 +5,31 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-      - uses: astral-sh/setup-uv@v7
-      - run: uv sync
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+      - run: uv sync --frozen
       - run: uv run ruff check src/ tests/
       - run: uv run ruff format --check src/ tests/
 
   typecheck:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-      - uses: astral-sh/setup-uv@v7
-      - run: uv sync
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+      - run: uv sync --frozen
       - run: uv run mypy src/
+      - run: uv run pyright src/
 
   test:
     runs-on: ubuntu-latest
@@ -29,24 +37,34 @@ jobs:
       matrix:
         python-version: ["3.12", "3.13"]
     steps:
-      - uses: actions/checkout@v6
-      - uses: astral-sh/setup-uv@v7
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
         with:
           python-version: ${{ matrix.python-version }}
-      - run: uv sync
-      - run: uv run python -m pytest tests/ --ignore=tests/integration -q --tb=short
+      - run: uv sync --frozen
+      - run: uv run python -m pytest tests/ --ignore=tests/integration -q --tb=short --cov=ducktail --cov-report=xml
+      - if: matrix.python-version == '3.12'
+        uses: codecov/codecov-action@57e3a136b779b570ffcdbf80b3bdc90e7fab3de2 # v6.0.0
+        with:
+          files: coverage.xml
 
   integration:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-      - uses: astral-sh/setup-uv@v7
-      - run: uv sync
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+      - run: uv sync --frozen
       - run: uv run python -m pytest tests/integration -m integration -q --tb=short
 
   audit:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-      - uses: astral-sh/setup-uv@v7
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
       - run: uv audit

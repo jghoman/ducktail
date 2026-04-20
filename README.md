@@ -1,5 +1,15 @@
 # ducktail
 
+[![PyPI version](https://img.shields.io/pypi/v/ducktail)](https://pypi.org/project/ducktail/)
+[![CI](https://img.shields.io/github/actions/workflow/status/jghoman/ducktail/ci.yml?branch=main&label=CI)](https://github.com/jghoman/ducktail/actions)
+[![codecov](https://codecov.io/gh/jghoman/ducktail/graph/badge.svg)](https://codecov.io/gh/jghoman/ducktail)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
+[![Python](https://img.shields.io/pypi/pyversions/ducktail)](https://pypi.org/project/ducktail/)
+[![Downloads](https://static.pepy.tech/badge/ducktail)](https://pepy.tech/project/ducktail)
+[![Patches welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](https://github.com/jghoman/ducktail/pulls)
+[![GitHub Actions Security Analysis with zizmor 🌈](https://github.com/jghoman/ducktail/actions/workflows/zizmor.yml/badge.svg)](https://github.com/jghoman/ducktail/actions/workflows/zizmor.yml)
+[![Dependabot Updates](https://github.com/jghoman/ducktail/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/jghoman/ducktail/actions/workflows/dependabot/dependabot-updates)
+
 `tail -f` for [DuckLake](https://ducklake.select) tables.
 
 ![Screenshot](./images/illustration.jpg)

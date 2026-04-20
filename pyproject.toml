@@ -29,6 +29,7 @@ packages = ["src/ducktail"]
 [dependency-groups]
 dev = [
     "pytest>=8.0",
+    "pytest-cov>=6.0",
     "mypy>=1.10",
     "pyright>=1.1",
     "ruff>=0.8",
