@@ -26,6 +26,10 @@ class Tailer:
         self._initialized: bool = False
 
     @property
+    def poll_interval(self) -> float:
+        return self._poll_interval
+
+    @property
     def last_snapshot_id(self) -> int | None:
         return self._last_snapshot_id
 

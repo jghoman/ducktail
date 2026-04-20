@@ -96,6 +96,6 @@ def run_interactive(tailer: Tailer, config: TailConfig) -> None:
 
                     live.update(_make_table(title, changes))
 
-                time.sleep(tailer._poll_interval)
+                time.sleep(tailer.poll_interval)
     except KeyboardInterrupt:
         pass
