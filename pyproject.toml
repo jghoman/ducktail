@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "ducktail"
-version = "1.0.0"
+version = "1.0.1"
 readme = "README.md"
 description = "Tail DuckLake tables via CDC"
 license = "Apache-2.0"
