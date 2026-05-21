@@ -109,11 +109,12 @@ release bump *flags:
         [[ "$confirm" =~ ^[Yy]$ ]] || { echo "Aborted."; exit 1; }
     fi
 
-    # Bump version in pyproject.toml
+    # Bump version in pyproject.toml and refresh lockfile
     sed -i '' "s/^version = \"${current}\"/version = \"${new}\"/" pyproject.toml
+    uv lock
 
     # Commit, tag, push
-    git add pyproject.toml
+    git add pyproject.toml uv.lock
     git commit -m "Release v${new}"
     git tag "v${new}"
     git push origin main --tags
