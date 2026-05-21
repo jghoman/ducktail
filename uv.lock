@@ -285,7 +285,7 @@ dev = [
 requires-dist = [
     { name = "click", specifier = ">=8.0,<9" },
     { name = "duckdb", specifier = ">=1.4,<2" },
-    { name = "pyarrow", specifier = ">=18.0,<24" },
+    { name = "pyarrow", specifier = ">=18.0,<25" },
     { name = "pyducklake", specifier = ">=1.0" },
     { name = "pytz", specifier = ">=2024.1" },
     { name = "rich", specifier = ">=13.0,<16" },
