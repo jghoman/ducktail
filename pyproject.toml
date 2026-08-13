@@ -26,7 +26,7 @@ requires-python = ">=3.12"
 dependencies = [
     "click>=8.0,<9",
     "duckdb>=1.4,<2",
-    "pyarrow>=18.0,<25",
+    "pyarrow>=18.0,<26",
     "pyducklake>=1.0.17",
     "rich>=13.0,<16",
     # Not imported by ducktail directly: duckdb's native bindings return pytz
