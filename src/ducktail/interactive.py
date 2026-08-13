@@ -2,17 +2,19 @@
 
 from __future__ import annotations
 
-import os
-import time
+import shutil
+import signal
+import sys
 from collections import deque
 from datetime import UTC, datetime
+from types import FrameType
 
 from rich.console import Console
 from rich.live import Live
 from rich.table import Table
 
 from ducktail.config import TailConfig
-from ducktail.formatter import METADATA_COLS, format_row
+from ducktail.formatter import KIND_PREFIX, KIND_STYLE, iter_change_events
 from ducktail.tailer import Tailer
 
 
@@ -35,6 +37,16 @@ def _make_table(
     return table
 
 
+def _utc_now() -> str:
+    return datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S UTC")
+
+
+def _exit_on_sigterm(signum: int, frame: FrameType | None) -> None:
+    # Raising SystemExit inside the Live context lets __exit__ restore the
+    # terminal (cursor, alt-screen) before the process dies.
+    sys.exit(0)
+
+
 def run_interactive(tailer: Tailer, config: TailConfig) -> None:
     """Run interactive TUI with Rich Live display."""
     title = f"Ducktail — {config.namespace}.{config.table_name}"
@@ -42,60 +54,27 @@ def run_interactive(tailer: Tailer, config: TailConfig) -> None:
 
     # Size the rolling buffer to fit the terminal, leaving room for
     # the table header (title + column headers + borders = ~4 lines).
-    term_rows = os.get_terminal_size().lines
+    # shutil's fallback keeps this working when stdout is not a TTY.
+    term_rows = shutil.get_terminal_size(fallback=(80, 24)).lines
     max_rows = max(term_rows - 4, 10)
     changes: deque[tuple[str, str, str, str]] = deque(maxlen=max_rows)
 
-    # Establish baseline snapshot before entering the live loop.
-    tailer.poll()
+    signal.signal(signal.SIGTERM, _exit_on_sigterm)
 
     console = Console()
     console.clear()
 
     try:
         with Live(_make_table(title, changes), console=console, refresh_per_second=4) as live:
-            while True:
-                changeset = tailer.poll()
-                if changeset is not None:
-                    now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S UTC")
 
-                    inserts = changeset.inserts()
-                    if inserts.num_rows > 0:
-                        user_cols = columns or [c for c in inserts.column_names if c not in METADATA_COLS]
-                        for i in range(inserts.num_rows):
-                            row = {col: inserts.column(col)[i].as_py() for col in user_cols}
-                            changes.append(
-                                (
-                                    "green",
-                                    "+",
-                                    now,
-                                    format_row(row, user_cols),
-                                )
-                            )
+            def _on_error(exc: Exception) -> None:
+                changes.append(("bold red", "!", _utc_now(), f"poll error: {exc} (retrying)"))
+                live.update(_make_table(title, changes))
 
-                    deletes = changeset.deletes()
-                    if deletes.num_rows > 0:
-                        user_cols = columns or [c for c in deletes.column_names if c not in METADATA_COLS]
-                        for i in range(deletes.num_rows):
-                            row = {col: deletes.column(col)[i].as_py() for col in user_cols}
-                            changes.append(
-                                (
-                                    "red",
-                                    "-",
-                                    now,
-                                    format_row(row, user_cols),
-                                )
-                            )
-
-                    for pre, post in changeset.updates():
-                        user_cols = columns or [k for k in pre if k not in METADATA_COLS]
-                        changed = [(col, pre[col], post[col]) for col in user_cols if pre.get(col) != post.get(col)]
-                        if changed:
-                            parts = ", ".join(f"{col}: {old} \u2192 {new}" for col, old, new in changed)
-                            changes.append(("yellow", "\u0394", now, parts))
-
-                    live.update(_make_table(title, changes))
-
-                time.sleep(tailer.poll_interval)
+            for changeset in tailer.tail(on_error=_on_error):
+                now = _utc_now()
+                for kind, text in iter_change_events(changeset, columns):
+                    changes.append((KIND_STYLE[kind], KIND_PREFIX[kind], now, text))
+                live.update(_make_table(title, changes))
     except KeyboardInterrupt:
         pass
