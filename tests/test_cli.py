@@ -25,3 +25,18 @@ def test_tail_missing_connection_fails() -> None:
     result = runner.invoke(cli, ["tail", "my_table"])
     assert result.exit_code != 0
     assert "Missing option" in result.output or "--connection" in result.output
+
+
+def test_tail_interval_zero_rejected() -> None:
+    """--interval 0 would hot-spin the catalog; reject it."""
+    runner = CliRunner()
+    result = runner.invoke(cli, ["tail", "t", "-C", "meta.duckdb", "--interval", "0"])
+    assert result.exit_code != 0
+    assert "--interval" in result.output
+
+
+def test_tail_interval_negative_rejected() -> None:
+    runner = CliRunner()
+    result = runner.invoke(cli, ["tail", "t", "-C", "meta.duckdb", "--interval", "-1"])
+    assert result.exit_code != 0
+    assert "--interval" in result.output
