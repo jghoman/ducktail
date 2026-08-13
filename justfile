@@ -80,47 +80,7 @@ clean:
 
 # === Release ===
 
-# Bump version, commit, tag, and push. Usage: just release patch|minor|major [--yes]
-[group('release')]
-release bump *flags:
-    #!/usr/bin/env bash
-    set -euo pipefail
-
-    # Parse current version
-    current=$(grep '^version' pyproject.toml | head -1 | sed 's/.*"\(.*\)"/\1/')
-    IFS='.' read -r major minor patch <<< "$current"
-
-    # Compute new version
-    case "{{bump}}" in
-        patch) patch=$((patch + 1)) ;;
-        minor) minor=$((minor + 1)); patch=0 ;;
-        major) major=$((major + 1)); minor=0; patch=0 ;;
-        *) echo "Usage: just release patch|minor|major [--yes]"; exit 1 ;;
-    esac
-    new="${major}.${minor}.${patch}"
-
-    echo "Current version: $current"
-    echo "New version:     $new"
-    echo ""
-
-    # Confirm unless --yes passed
-    if [[ " {{flags}} " != *" --yes "* ]]; then
-        read -rp "Proceed with release v${new}? [y/N] " confirm
-        [[ "$confirm" =~ ^[Yy]$ ]] || { echo "Aborted."; exit 1; }
-    fi
-
-    # Bump version in pyproject.toml and refresh lockfile
-    sed -i '' "s/^version = \"${current}\"/version = \"${new}\"/" pyproject.toml
-    uv lock
-
-    # Commit, tag, push
-    git add pyproject.toml uv.lock
-    git commit -m "Release v${new}"
-    git tag "v${new}"
-    git push origin main --tags
-
-    echo ""
-    echo "Released v${new} — workflow will build and publish to PyPI."
+# Releases are automated via Release Please (.github/workflows/release.yml).
 
 # === Docs ===
 
