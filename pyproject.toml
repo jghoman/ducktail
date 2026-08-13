@@ -1,10 +1,10 @@
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling==1.32.0"]
 build-backend = "hatchling.build"
 
 [project]
 name = "ducktail"
-version = "1.0.3"
+version = "1.0.4"
 readme = "README.md"
 description = "Tail DuckLake tables via CDC"
 license = "Apache-2.0"
