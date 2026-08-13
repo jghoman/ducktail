@@ -27,8 +27,11 @@ dependencies = [
     "click>=8.0,<9",
     "duckdb>=1.4,<2",
     "pyarrow>=18.0,<25",
-    "pyducklake>=1.0",
+    "pyducklake>=1.0.17",
     "rich>=13.0,<16",
+    # Not imported by ducktail directly: duckdb's native bindings return pytz
+    # tzinfo objects when reading TIMESTAMP WITH TIME ZONE columns (e.g.
+    # Table.snapshots). Removing this breaks runtime — keep it.
     "pytz>=2024.1",
 ]
 

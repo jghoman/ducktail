@@ -9,7 +9,7 @@ from pyducklake.schema import Schema, optional, required
 from pyducklake.table import Table
 from pyducklake.types import IntegerType, StringType
 
-from ducktail.formatter import format_changeset
+from ducktail.formatter import format_changeset, iter_change_events
 from ducktail.tailer import Tailer
 
 pytestmark = pytest.mark.integration
@@ -120,13 +120,13 @@ def test_formatter_renders_changes(test_table: tuple[Catalog, Table]) -> None:
     assert changeset is not None
 
     lines = format_changeset(changeset)
-    assert len(lines) >= 1
+    assert len(lines) == 1
     for line in lines:
         assert line.startswith("+ ")
-    # Verify actual content appears
+    # Verify actual content appears (values are repr-formatted)
     combined = " ".join(lines)
     assert "id=30" in combined
-    assert "name=z" in combined
+    assert "name='z'" in combined
 
 
 def test_tailer_column_projection(test_table: tuple[Catalog, Table]) -> None:
@@ -157,3 +157,56 @@ def test_tailer_no_changes(test_table: tuple[Catalog, Table]) -> None:
     tailer = Tailer(table)
     assert tailer.poll() is None  # baseline
     assert tailer.poll() is None  # no changes
+
+
+def test_tailer_no_redelivery(test_table: tuple[Catalog, Table]) -> None:
+    """Regression: the baseline snapshot's changes must not be delivered.
+
+    ducklake_table_changes treats its start bound as inclusive, so polling
+    (last, current) would redeliver the last processed snapshot's changes on
+    every advance — including the entire pre-baseline history on the first
+    delivery. The tailer must query (last + 1, current).
+    """
+    _catalog, table = test_table
+
+    table.append(pa.table({"id": [1], "name": ["alice"]}))
+
+    tailer = Tailer(table)
+    assert tailer.poll() is None  # baseline AFTER the first append
+
+    table.append(pa.table({"id": [2], "name": ["bob"]}))
+    changeset = tailer.poll()
+    assert changeset is not None
+    # Exactly the new row — no phantom re-delivery of id=1 from the baseline
+    assert changeset.num_rows == 1
+    inserts = changeset.inserts()
+    assert inserts.num_rows == 1
+    assert inserts.column("id")[0].as_py() == 2
+
+    table.append(pa.table({"id": [3], "name": ["carol"]}))
+    changeset = tailer.poll()
+    assert changeset is not None
+    # id=2 must not be redelivered either
+    assert changeset.num_rows == 1
+    assert changeset.inserts().column("id")[0].as_py() == 3
+
+
+def test_tailer_double_update_renders_both_deltas(test_table: tuple[Catalog, Table]) -> None:
+    """A row updated twice in one poll window renders two deltas (A→B, B→C)."""
+    catalog, table = test_table
+
+    table.append(pa.table({"id": [1], "name": ["a"]}))
+
+    tailer = Tailer(table)
+    assert tailer.poll() is None  # baseline
+
+    catalog.connection.execute("UPDATE lake.main.test_table SET name = 'b' WHERE id = 1")
+    catalog.connection.execute("UPDATE lake.main.test_table SET name = 'c' WHERE id = 1")
+
+    changeset = tailer.poll()
+    assert changeset is not None
+    events = list(iter_change_events(changeset))
+    assert events == [
+        ("update", "name: 'a' → 'b'"),
+        ("update", "name: 'b' → 'c'"),
+    ]

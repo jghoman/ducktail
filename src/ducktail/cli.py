@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import sys
 
 import click
@@ -22,7 +23,13 @@ def cli() -> None:
 @click.option("--connection", "-C", required=True, help="Catalog connection string (e.g. meta.duckdb, postgres:...).")
 @click.option("--data-path", "-d", default=".", help="Data path for DuckLake files.")
 @click.option("--namespace", "-n", default="main", help="Table namespace.")
-@click.option("--interval", "-i", default=1.0, type=float, help="Poll interval in seconds.")
+@click.option(
+    "--interval",
+    "-i",
+    default=1.0,
+    type=click.FloatRange(min=0.0, min_open=True),
+    help="Poll interval in seconds.",
+)
 @click.option("--columns", "-col", multiple=True, help="Columns to display (repeat for multiple).")
 @click.option("--filter", "-f", "filter_expr", default=None, help="Filter expression.")
 @click.option("--mode", "-m", type=click.Choice(["pager", "interactive"]), default="pager", help="Output mode.")
@@ -50,27 +57,31 @@ def tail(
         output_mode=mode,  # type: ignore[arg-type]
     )
 
-    cat = Catalog(config.catalog_name, config.catalog_connection, data_path=config.data_path)
-    tbl = cat.load_table((config.namespace, config.table_name))
+    with Catalog(config.catalog_name, config.catalog_connection, data_path=config.data_path) as cat:
+        tbl = cat.load_table((config.namespace, config.table_name))
 
-    tailer = Tailer(
-        table=tbl,
-        poll_interval=config.poll_interval,
-        columns=config.columns,
-        filter_expr=config.filter_expr,
-    )
+        tailer = Tailer(
+            table=tbl,
+            poll_interval=config.poll_interval,
+            columns=config.columns,
+            filter_expr=config.filter_expr,
+        )
 
-    if config.output_mode == "interactive":
-        _tail_interactive(tailer, config)
-    else:
-        _tail_pager(tailer, config)
+        if config.output_mode == "interactive":
+            _tail_interactive(tailer, config)
+        else:
+            _tail_pager(tailer, config)
 
 
 def _tail_pager(tailer: Tailer, config: TailConfig) -> None:
     """Stream formatted changes to stdout."""
     click.echo(f"Tailing {config.namespace}.{config.table_name} (Ctrl+C to stop)", err=True)
+
+    def _warn(exc: Exception) -> None:
+        click.echo(f"poll error: {exc} (retrying)", err=True)
+
     try:
-        for changeset in tailer.tail():
+        for changeset in tailer.tail(on_error=_warn):
             user_cols = list(config.columns) if config.columns else None
             lines = format_changeset(changeset, columns=user_cols)
             for line in lines:
@@ -78,6 +89,11 @@ def _tail_pager(tailer: Tailer, config: TailConfig) -> None:
             sys.stdout.flush()
     except KeyboardInterrupt:
         click.echo("\nStopped.", err=True)
+    except BrokenPipeError:
+        # Downstream closed the pipe (e.g. `| head`). Redirect stdout to
+        # devnull so the interpreter-shutdown flush does not re-raise.
+        devnull = os.open(os.devnull, os.O_WRONLY)
+        os.dup2(devnull, sys.stdout.fileno())
 
 
 def _tail_interactive(tailer: Tailer, config: TailConfig) -> None:
