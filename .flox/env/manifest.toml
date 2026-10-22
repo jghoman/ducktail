@@ -17,7 +17,7 @@ schema-version = "1.11.0"
 [install]
 just.pkg-path = "just"
 python312.pkg-path = "python312"
-uv.pkg-path = "uv"
+uv.flake = "github:NixOS/nixpkgs/7bfe60fe75d8c7171b95e6ec2d610d4778cc549b#uv"
 
 
 ## Environment Variables ---------------------------------------------
